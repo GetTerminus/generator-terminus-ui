@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
@@ -40,7 +41,7 @@ module.exports = class extends Generator {
     this.argument('name', {
       type: String,
       desc: 'The name of the component (`button` or `my-button`)',
-      required: true
+      required: true,
     });
 
     // Name: `button`
@@ -68,7 +69,7 @@ module.exports = class extends Generator {
 
     const destinationDir = this.destinationPath(`src/lib/src/${this.options.name}/`);
 
-    mkdirp(destinationDir, err => {
+    mkdirp(destinationDir, (err) => {
       if (err) {
         console.error(err);
       } else {
@@ -79,7 +80,7 @@ module.exports = class extends Generator {
           {
             kebabName: this.options.name,
             moduleName: this.options.moduleName,
-            componentName: this.options.componentName
+            componentName: this.options.componentName,
           }
         );
 
@@ -89,7 +90,7 @@ module.exports = class extends Generator {
           this.destinationPath(`${destinationDir}/${this.options.name}.component.ts`),
           {
             kebabName: this.options.name,
-            componentName: this.options.componentName
+            componentName: this.options.componentName,
           }
         );
 
@@ -99,7 +100,7 @@ module.exports = class extends Generator {
           this.destinationPath(`${destinationDir}/${this.options.name}.component.scss`),
           {
             kebabName: this.options.name,
-            prettyName: this.options.prettyName
+            prettyName: this.options.prettyName,
           }
         );
 
@@ -115,7 +116,7 @@ module.exports = class extends Generator {
           this.destinationPath(`${destinationDir}/${this.options.name}.component.spec.ts`),
           {
             kebabName: this.options.name,
-            componentName: this.options.componentName
+            componentName: this.options.componentName,
           }
         );
       }
@@ -134,28 +135,28 @@ module.exports = class extends Generator {
     utils.addToFile(
       MODULE_FILE,
       `import { ${this.options.moduleName} } from './${this.options.name}/${this.options.name}.module';`,
-      utils.MODULE_IMPORT_MARKER,
+      utils.MODULE_IMPORT_MARKER
     );
 
     // Add to imports array
     utils.addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      utils.MODULE_IMPORTS_MARKER,
+      utils.MODULE_IMPORTS_MARKER
     );
 
     // Add to exports array
     utils.addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      utils.MODULE_EXPORTS_MARKER,
+      utils.MODULE_EXPORTS_MARKER
     );
 
     // Export from the primary index file
     utils.addToFile(
       INDEX_PATH,
       `export { ${this.options.moduleName} } from './src/${this.options.name}/${this.options.name}.module';`,
-      utils.INDEX_EXPORT_MARKER,
+      utils.INDEX_EXPORT_MARKER
     );
   }
 
@@ -180,7 +181,7 @@ module.exports = class extends Generator {
           {
             kebabName: this.options.name,
             pascalName: this.options.pascalName,
-            selector: this.options.componentSelector
+            selector: this.options.componentSelector,
           }
         );
       }
@@ -209,14 +210,14 @@ module.exports = class extends Generator {
     utils.addToFile(
       DEMO_COMPONENTS_FILE,
       `import { ${this.options.pascalName}Component } from './${this.options.name}.component';`,
-      utils.DEMO_IMPORT_MARKER,
+      utils.DEMO_IMPORT_MARKER
     );
 
     // Inject the route to the new demo component
     utils.addToFile(
       DEMO_COMPONENTS_FILE,
       route,
-      utils.DEMO_ROUTE_MARKER,
+      utils.DEMO_ROUTE_MARKER
     );
   }
 

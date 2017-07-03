@@ -1,8 +1,5 @@
-var path = require('path');
-var fs = require('fs');
-/*
- *var ngParseModule = require('ng-parse-module');
- */
+const path = require('path');
+const fs = require('fs');
 
 exports.MODULE_IMPORT_MARKER = '// INJECT IMPORT TO MODULE';
 exports.MODULE_IMPORTS_MARKER = '// INJECT IMPORT IN MODULE ARRAY';
@@ -13,7 +10,7 @@ exports.DEMO_IMPORT_MARKER = '// INJECT DEMO IMPORT';
 exports.DEMO_ROUTE_MARKER = '// INJECT DEMO ROUTE';
 exports.CZ_CONFIG_MARKER = '// INJECT COMPONENT SCOPE';
 
-exports.addToFile = function (filename, lineToAdd, beforeMarker) {
+exports.addToFile = function(filename, lineToAdd, beforeMarker) {
   try {
     const fullPath = path.resolve(process.cwd(), filename);
     let fileSrc = fs.readFileSync(fullPath, 'utf8');

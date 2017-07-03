@@ -1,0 +1,43 @@
+version: 2
+
+jobs:
+  build:
+
+    docker:
+      - image: circleci/node:latest-browsers
+
+    working_directory: ~/ci-build
+
+    environment:
+      TEST_REPORTS: /coverage
+
+    steps:
+      - add_ssh_keys
+
+      - checkout
+
+      - run:
+          name: Install Dependencies
+          command: npm i
+
+      - run:
+          name: Lint
+          command: npm run lint
+
+      - run:
+          name: Prepare
+          command: npm run prepare
+
+      - run:
+          name: Release
+          # Note: Currently `yarn publish` hangs (known issue) 4.4.17
+          command: npm run semantic-release || echo "No release needed."
+
+# HACK: This will allow tags to kick off the deploy process. Correct syntax support is coming soon:
+# https://discuss.circleci.com/t/git-tag-deploys-in-2-0/9493/8
+deployment:
+  fake_deploy_for_cci2:
+    tag: /.*/
+    commands:
+      - echo "make tags run in 2.0"
+
