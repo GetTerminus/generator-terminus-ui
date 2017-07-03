@@ -21,7 +21,7 @@ module.exports = class extends Generator {
       yosay(
         message,
         {
-          maxLength: 60
+          maxLength: 60,
         }
       )
     );
