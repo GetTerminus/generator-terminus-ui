@@ -1,6 +1,6 @@
 {
   "name": "generator-terminus-ui",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "A generator for adding new components to the Terminus UI library.",
   "homepage": "https://github.com/GetTerminus/generator-terminus-ui",
   "author": {
@@ -40,6 +40,7 @@
     "last-release-git": "0.0.3",
     "nsp": "^2.6.3",
     "semantic-release": "^6.3.6",
+    "validate-commit-msg": "^2.12.2",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
   },
