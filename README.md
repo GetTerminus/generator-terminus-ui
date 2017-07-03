@@ -58,6 +58,7 @@ below:
 1. Export the `TsMyButtonModule` module from `./src/lib/index.ts`
 1. Create the `MyButtonComponent` for development at `./src/demo/src/app/components/my-button.component.ts`
 1. Add the `MyButtonComponent` component to the demo navigation array in `./src/demo/src/app/components/components.component.ts`
+1. Add the new component as a scope `MyButton`
 
 
 ## TODO
