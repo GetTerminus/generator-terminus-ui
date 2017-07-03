@@ -3,11 +3,7 @@
   "version": "0.0.0-development",
   "description": "A generator for adding new components to the Terminus UI library.",
   "homepage": "https://github.com/GetTerminus/generator-terminus-ui",
-  "author": {
-    "name": "Terminus",
-    "email": "benjamin.charity@terminus.com",
-    "url": "https://github.com/GetTerminus/"
-  },
+  "author": "Terminus",
   "files": [
     "generators"
   ],
@@ -74,6 +70,9 @@
     "verifyConditions": "condition-circle",
     "branch": "master"
   },
-  "repository": "@Terminus/generator-terminus-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GetTerminus/generator-terminus-ui.git"
+  },
   "license": "MIT"
 }
