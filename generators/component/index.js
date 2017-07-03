@@ -15,6 +15,7 @@ const MODULE_FILE = 'src/lib/src/module.ts';
 const INDEX_PATH = 'src/lib/index.ts';
 const DEMO_COMPONENT_PATH = `src/demo/src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
+const CS_CONFIG_FILE = `tooling/cz-config.js`;
 
 /*
  * Full path for component:
@@ -28,6 +29,7 @@ const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
  * 7. Add component to components.ts components array
  * 7. Add component to demo module
  * 8. Add route for component
+ * 9. Add new scope to `cz-config`
  */
 
 module.exports = class extends Generator {
@@ -216,6 +218,21 @@ module.exports = class extends Generator {
       DEMO_COMPONENTS_FILE,
       route,
       utils.DEMO_ROUTE_MARKER
+    );
+  }
+
+  /**
+   * Add the new component as an available scope in commitizen
+   */
+  addCommitizenScope() {
+    this.log(
+      `Adding a new commit scope for ${chalk.red(this.options.pascalName)}.`
+    );
+
+    utils.addToFile(
+      CS_CONFIG_FILE,
+      `{name: '${this.options.pascalName}'},`,
+      utils.CZ_CONFIG_MARKER
     );
   }
 };

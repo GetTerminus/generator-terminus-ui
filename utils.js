@@ -8,6 +8,7 @@ exports.INDEX_EXPORT_MARKER = '// INJECT EXPORT IN LIB INDEX';
 
 exports.DEMO_IMPORT_MARKER = '// INJECT DEMO IMPORT';
 exports.DEMO_ROUTE_MARKER = '// INJECT DEMO ROUTE';
+exports.CZ_CONFIG_MARKER = '// INJECT COMPONENT SCOPE';
 
 exports.addToFile = function(filename, lineToAdd, beforeMarker) {
   try {
