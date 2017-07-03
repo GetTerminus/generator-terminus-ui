@@ -81,6 +81,8 @@ MIT © [Terminus][license-url]
 - SCSS helper generator
 
 
+<!-- LINKS -->
+
 [npm-image]: https://badge.fury.io/js/generator-terminus-ui.svg
 [npm-url]: https://npmjs.org/package/generator-terminus-ui
 [semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
@@ -91,3 +93,4 @@ MIT © [Terminus][license-url]
 [license-url]: LICENSE
 [circle-badge]: https://circleci.com/gh/GetTerminus/generator-terminus-ui/tree/master.svg?style=shield
 [circle-link]: https://circleci.com/gh/GetTerminus/generator-terminus-ui/tree/master
+
