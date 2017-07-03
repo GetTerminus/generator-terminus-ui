@@ -1,7 +1,15 @@
 # Terminus UI Component Generator
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![semantic-release][semantic-release-badge]][semantic-release] [![MIT License][license-image]][license-url]
+
 > Generate new components for the Terminus UI library.
+
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Installation
 
@@ -62,11 +70,14 @@ below:
 
 ## License
 
-MIT © [Terminus](LICENSE)
+MIT © [Terminus][license-url]
 
 
 [npm-image]: https://badge.fury.io/js/generator-terminus-ui.svg
 [npm-url]: https://npmjs.org/package/generator-terminus-ui
-
+[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release]: https://github.com/semantic-release/semantic-release
 [terminus-ui]: https://github.com/GetTerminus/terminus-ui
 [yeoman]: http://yeoman.io
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: LICENSE
