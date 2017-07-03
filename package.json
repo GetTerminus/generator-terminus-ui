@@ -19,7 +19,7 @@
     "yeoman-generator"
   ],
   "scripts": {
-    "prepublish": "nsp check",
+    "prepare": "nsp check",
     "pretest": "eslint . --fix",
     "test": "jest",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"

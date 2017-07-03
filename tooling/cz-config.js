@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
   ],
 
   scopes: [
-    {name: 'Welcom'},
+    {name: 'Welcome'},
     {name: 'Component'},
     {name: 'Dependencies'},
     {name: 'Tooling'},
