@@ -24,7 +24,7 @@
     "prepare": "nsp check",
     "lint": "eslint . --fix",
     "pretest": "npm run lint",
-    "test": "jest",
+    "test": "echo 'No tests are currently set up.'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
