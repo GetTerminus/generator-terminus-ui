@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Terminus",
+      "authorEmail": "benjamin.charity@terminus.com",
+      "authorUrl": "https://github.com/GetTerminus/"
+    }
+  }
+}
