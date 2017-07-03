@@ -19,8 +19,11 @@
     "yeoman-generator"
   ],
   "scripts": {
+    "cm": "./node_modules/.bin/git-cz",
+    "docs:toc": "doctoc --title '**Table of Contents**' --maxlevel 4 ./README.md",
     "prepare": "nsp check",
-    "pretest": "eslint . --fix",
+    "lint": "eslint . --fix",
+    "pretest": "npm run lint",
     "test": "jest",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
