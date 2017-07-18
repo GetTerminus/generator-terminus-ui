@@ -25,6 +25,12 @@ describe(`<%= componentName %>`, () => {
         TestHostComponent,
       ],
     })
+      .overrideComponent(<%= componentName %>, {
+        set: {
+          template: '',
+          templateUrl: null,
+        }
+      })
       .compileComponents().then(() => {
         this.fixture = TestBed.createComponent(<%= componentName %>);
         this.component = this.fixture.componentInstance;
