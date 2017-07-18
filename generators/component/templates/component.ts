@@ -6,7 +6,7 @@ import {
 
 /**
  * TODO: Fill this section out
- * This is the <%= componentName %> UI Component
+ * This is the <%= kebabName %> UI Component
  *
  * @example
  * <<%= kebabName %>
