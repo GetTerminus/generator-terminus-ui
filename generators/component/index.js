@@ -147,7 +147,10 @@ module.exports = class extends Generator {
         // Create the component HTML
         this.fs.copyTpl(
           this.templatePath('component.html'),
-          this.destinationPath(`${destinationDir}/${this.options.name}.component.html`)
+          this.destinationPath(`${destinationDir}/${this.options.name}.component.html`),
+          {
+            pascalName: this.options.pascalName,
+          }
         );
 
         // Create the component spec
