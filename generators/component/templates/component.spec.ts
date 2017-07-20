@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import {
+  Component,
+  ViewChild,
+} from '@angular/core';
+import {
+  TestBed,
+  ComponentFixture,
+  async,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { <%= componentName %> } from './<%= kebabName %>.component';
@@ -12,7 +19,10 @@ import { <%= componentName %> } from './<%= kebabName %>.component';
     </div>
   `,
 })
-class TestHostComponent {}
+class TestHostComponent {
+  @ViewChild(<%= componentName %>)
+  public <%= camelCaseComponentName %>: <%= componentName %>;
+}
 
 describe(`<%= componentName %>`, () => {
 
@@ -32,8 +42,9 @@ describe(`<%= componentName %>`, () => {
         }
       })
       .compileComponents().then(() => {
-        this.fixture = TestBed.createComponent(<%= componentName %>);
-        this.component = this.fixture.componentInstance;
+        this.fixture = TestBed.createComponent(TestHostComponent);
+        this.hostComponent = this.fixture.componentInstance;
+        this.component = this.hostComponent.<%= camelCaseComponentName %>;
       });
   }));
 
