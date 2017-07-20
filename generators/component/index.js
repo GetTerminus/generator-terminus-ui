@@ -5,9 +5,6 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const _startCase = require('lodash.startcase');
 const mkdirp = require('mkdirp');
-/*
- *const utils = require('./../../utils.js');
- */
 const path = require('path');
 const fs = require('fs');
 
@@ -19,6 +16,7 @@ const MODULE_FILE = 'src/lib/src/module.ts';
 const INDEX_PATH = 'src/lib/index.ts';
 const DEMO_COMPONENT_PATH = `src/demo/src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
+const DEMO_MODULE_FILE = `src/demo/src/app/app.module.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
 
 const MODULE_IMPORT_MARKER = '// INJECT IMPORT TO MODULE';
@@ -26,7 +24,10 @@ const MODULE_IMPORTS_MARKER = '// INJECT IMPORT IN MODULE ARRAY';
 const MODULE_EXPORTS_MARKER = '// INJECT EXPORT IN MODULE ARRAY';
 const INDEX_EXPORT_MARKER = '// INJECT EXPORT IN LIB INDEX';
 const DEMO_IMPORT_MARKER = '// INJECT DEMO IMPORT';
-const DEMO_ROUTE_MARKER = '// INJECT DEMO ROUTE';
+const DEMO_IMPORT_FROM_UI_MARKER = '// INJECT DEMO UI IMPORT';
+const DEMO_IMPORT_COMPONENT_MARKER = '// INJECT DEMO IMPORT COMPONENT';
+const DEMO_ADD_TO_IMPORTS_MARKER = '// INJECT DEMO IMPORTS';
+const DEMO_ADD_TO_DECLARATIONS_MARKER = '// INJECT DEMO DECLARATION';
 const CZ_CONFIG_MARKER = '// INJECT COMPONENT SCOPE';
 
 
@@ -253,12 +254,34 @@ module.exports = class extends Generator {
       DEMO_IMPORT_MARKER
     );
 
-    // Inject the route to the new demo component
+    // Import the new UI component from the library
     addToFile(
-      DEMO_COMPONENTS_FILE,
-      route,
-      DEMO_ROUTE_MARKER
+      DEMO_MODULE_FILE,
+      this.options.moduleName,
+      DEMO_IMPORT_FROM_UI_MARKER
     );
+
+    // Add the new UI component to the imports array
+    addToFile(
+      DEMO_MODULE_FILE,
+      this.options.moduleName,
+      DEMO_ADD_TO_IMPORTS_MARKER
+    );
+
+    // Import the demo component for the new UI component
+    addToFile(
+      DEMO_MODULE_FILE,
+      `import { ${this.options.pascalName} } from './components/${this.options.name}.component';`,
+      DEMO_IMPORT_COMPONENT_MARKER
+    );
+
+    // Add the demo component to the declarations array
+    addToFile(
+      DEMO_MODULE_FILE,
+      this.options.pascalName,
+      DEMO_ADD_TO_DECLARATIONS_MARKER
+    );
+
   }
 
   /**
