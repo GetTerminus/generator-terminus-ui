@@ -30,6 +30,29 @@ const DEMO_ROUTE_MARKER = '// INJECT DEMO ROUTE';
 const CZ_CONFIG_MARKER = '// INJECT COMPONENT SCOPE';
 
 
+/**
+ * Helper method to inject a line to a file
+ *
+ * @param {String} filename The name of the file to edit
+ * @param {String} lineToAdd The content to add to the file
+ * @param {String} beforeMarker The marker to inject the content above
+ */
+function addToFile(filename, lineToAdd, beforeMarker) {
+  try {
+    const fullPath = path.resolve(process.cwd(), filename);
+    let fileSrc = fs.readFileSync(fullPath, 'utf8');
+    const indexOf = fileSrc.indexOf(beforeMarker);
+    const lineStart = fileSrc.substring(0, indexOf).lastIndexOf('\n') + 1;
+    const indent = fileSrc.substring(lineStart, indexOf);
+    fileSrc = fileSrc.substring(0, indexOf) + lineToAdd + '\n' + indent + fileSrc.substring(indexOf);
+
+    fs.writeFileSync(fullPath, fileSrc);
+  } catch (e) {
+    throw e;
+  }
+};
+
+
 /*
  * Full path for component:
  *
@@ -255,19 +278,4 @@ module.exports = class extends Generator {
 };
 
 
-
-function addToFile(filename, lineToAdd, beforeMarker) {
-  try {
-    const fullPath = path.resolve(process.cwd(), filename);
-    let fileSrc = fs.readFileSync(fullPath, 'utf8');
-    const indexOf = fileSrc.indexOf(beforeMarker);
-    const lineStart = fileSrc.substring(0, indexOf).lastIndexOf('\n') + 1;
-    const indent = fileSrc.substring(lineStart, indexOf);
-    fileSrc = fileSrc.substring(0, indexOf) + lineToAdd + '\n' + indent + fileSrc.substring(indexOf);
-
-    fs.writeFileSync(fullPath, fileSrc);
-  } catch (e) {
-    throw e;
-  }
-};
 
