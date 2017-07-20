@@ -5,7 +5,11 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const _startCase = require('lodash.startcase');
 const mkdirp = require('mkdirp');
-const utils = require('./../../utils.js');
+/*
+ *const utils = require('./../../utils.js');
+ */
+const path = require('path');
+const fs = require('fs');
 
 const LIB_PREFIX = 'Ts';
 const COMPONENT_PREFIX = LIB_PREFIX.toLowerCase();
@@ -16,6 +20,38 @@ const INDEX_PATH = 'src/lib/index.ts';
 const DEMO_COMPONENT_PATH = `src/demo/src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
+
+const MODULE_IMPORT_MARKER = '// INJECT IMPORT TO MODULE';
+const MODULE_IMPORTS_MARKER = '// INJECT IMPORT IN MODULE ARRAY';
+const MODULE_EXPORTS_MARKER = '// INJECT EXPORT IN MODULE ARRAY';
+const INDEX_EXPORT_MARKER = '// INJECT EXPORT IN LIB INDEX';
+const DEMO_IMPORT_MARKER = '// INJECT DEMO IMPORT';
+const DEMO_ROUTE_MARKER = '// INJECT DEMO ROUTE';
+const CZ_CONFIG_MARKER = '// INJECT COMPONENT SCOPE';
+
+
+/**
+ * Helper method to inject a line to a file
+ *
+ * @param {String} filename The name of the file to edit
+ * @param {String} lineToAdd The content to add to the file
+ * @param {String} beforeMarker The marker to inject the content above
+ */
+function addToFile(filename, lineToAdd, beforeMarker) {
+  try {
+    const fullPath = path.resolve(process.cwd(), filename);
+    let fileSrc = fs.readFileSync(fullPath, 'utf8');
+    const indexOf = fileSrc.indexOf(beforeMarker);
+    const lineStart = fileSrc.substring(0, indexOf).lastIndexOf('\n') + 1;
+    const indent = fileSrc.substring(lineStart, indexOf);
+    fileSrc = fileSrc.substring(0, indexOf) + lineToAdd + '\n' + indent + fileSrc.substring(indexOf);
+
+    fs.writeFileSync(fullPath, fileSrc);
+  } catch (e) {
+    throw e;
+  }
+};
+
 
 /*
  * Full path for component:
@@ -57,7 +93,7 @@ module.exports = class extends Generator {
     this.options.componentSelector = `${COMPONENT_PREFIX}-${this.options.name}`;
     // Lowercased first character component name: `myButton`
     this.options.camelCaseName = this.options.pascalName.charAt(0).toLowerCase() +
-      this.options.pascalName.slice(1)
+      this.options.pascalName.slice(1);
   }
 
   /**
@@ -136,31 +172,31 @@ module.exports = class extends Generator {
     );
 
     // Import to the module file
-    utils.addToFile(
+    addToFile(
       MODULE_FILE,
       `import { ${this.options.moduleName} } from './${this.options.name}/${this.options.name}.module';`,
-      utils.MODULE_IMPORT_MARKER
+      MODULE_IMPORT_MARKER
     );
 
     // Add to imports array
-    utils.addToFile(
+    addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      utils.MODULE_IMPORTS_MARKER
+      MODULE_IMPORTS_MARKER
     );
 
     // Add to exports array
-    utils.addToFile(
+    addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      utils.MODULE_EXPORTS_MARKER
+      MODULE_EXPORTS_MARKER
     );
 
     // Export from the primary index file
-    utils.addToFile(
+    addToFile(
       INDEX_PATH,
       `export { ${this.options.moduleName} } from './src/${this.options.name}/${this.options.name}.module';`,
-      utils.INDEX_EXPORT_MARKER
+      INDEX_EXPORT_MARKER
     );
   }
 
@@ -211,17 +247,17 @@ module.exports = class extends Generator {
   },`;
 
     // Import the demo component
-    utils.addToFile(
+    addToFile(
       DEMO_COMPONENTS_FILE,
       `import { ${this.options.pascalName}Component } from './${this.options.name}.component';`,
-      utils.DEMO_IMPORT_MARKER
+      DEMO_IMPORT_MARKER
     );
 
     // Inject the route to the new demo component
-    utils.addToFile(
+    addToFile(
       DEMO_COMPONENTS_FILE,
       route,
-      utils.DEMO_ROUTE_MARKER
+      DEMO_ROUTE_MARKER
     );
   }
 
@@ -233,10 +269,13 @@ module.exports = class extends Generator {
       `Adding a new commit scope for ${chalk.red(this.options.pascalName)}.`
     );
 
-    utils.addToFile(
+    addToFile(
       CS_CONFIG_FILE,
       `{name: '${this.options.pascalName}'},`,
-      utils.CZ_CONFIG_MARKER
+      CZ_CONFIG_MARKER
     );
   }
 };
+
+
+
