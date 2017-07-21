@@ -19,16 +19,44 @@ const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
 const DEMO_MODULE_FILE = `src/demo/src/app/app.module.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
 
-const MODULE_IMPORT_MARKER = '// INJECT IMPORT TO MODULE';
-const MODULE_IMPORTS_MARKER = '// INJECT IMPORT IN MODULE ARRAY';
-const MODULE_EXPORTS_MARKER = '// INJECT EXPORT IN MODULE ARRAY';
-const INDEX_EXPORT_MARKER = '// INJECT EXPORT IN LIB INDEX';
-const DEMO_IMPORT_MARKER = '// INJECT DEMO IMPORT';
-const DEMO_IMPORT_FROM_UI_MARKER = '// INJECT DEMO UI IMPORT';
-const DEMO_IMPORT_COMPONENT_MARKER = '// INJECT DEMO IMPORT COMPONENT';
-const DEMO_ADD_TO_IMPORTS_MARKER = '// INJECT DEMO IMPORTS';
-const DEMO_ADD_TO_DECLARATIONS_MARKER = '// INJECT DEMO DECLARATION';
-const CZ_CONFIG_MARKER = '// INJECT COMPONENT SCOPE';
+// TODO: Move markers and inject method back to shared utils file
+
+const MARKERS = {
+  // Import the UI component module to the UI module file
+  importUiComponentToUiModule: '// INJECT: UI component to UI module',
+
+  // Add the UI component module to the UI module import array
+  addUiComponentToUiModuleImportArray: '// INJECT: Add UI component module to imports',
+
+  // Add the UI comonent module to the module exports array
+  addUiComponentToUiModuleExports: '// INJECT: Add UI component to module exports',
+
+  // Export the UI component inside the index.ts file
+  addUiComponentIndexExport: '// INJECT: Export the UI component from the module index',
+
+  // Import the demo component into the constants file
+  addDemoComponentImportToConstants: '// INJECT: Import demo component to constants file',
+
+  // Add a new route for the demo component - MISSING
+  addRouteForDemoComponent: '// INJECT: Add route for demo component',
+
+  // Import the new UI component from the lib into the demo app module
+  addUiComponentToDemoImports: '// INJECT: Add new UI component to demo UI imports',
+
+  // Add the new UI component in the demo imports array
+  addUiComponentToUiImports: '// INJECT: Add new UI component to demo module imports array',
+
+  // Import the demo component file to the demo module
+  importDemoComponentToDemoModule: '// INJECT: Import demo component file',
+
+  // Add demo component to the demo module declarations
+  addDemoComponentToDeclarations: '// INJECT: Add demo component to declarations',
+
+  // Add the new UI component as a commitizen scope
+  addUiComponentAsCommitizenScope: '// INJECT: Add commitizen scope',
+};
+
+
 
 
 /**
@@ -179,28 +207,28 @@ module.exports = class extends Generator {
     addToFile(
       MODULE_FILE,
       `import { ${this.options.moduleName} } from './${this.options.name}/${this.options.name}.module';`,
-      MODULE_IMPORT_MARKER
+      MARKERS.importUiComponentToUiModule
     );
 
     // Add to imports array
     addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      MODULE_IMPORTS_MARKER
+      MARKERS.addUiComponentToUiModuleImportArray
     );
 
     // Add to exports array
     addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      MODULE_EXPORTS_MARKER
+      MARKERS.addUiComponentToUiModuleExports
     );
 
     // Export from the primary index file
     addToFile(
       INDEX_PATH,
       `export { ${this.options.moduleName} } from './src/${this.options.name}/${this.options.name}.module';`,
-      INDEX_EXPORT_MARKER
+      MARKERS.addUiComponentIndexExport
     );
   }
 
@@ -254,35 +282,42 @@ module.exports = class extends Generator {
     addToFile(
       DEMO_COMPONENTS_FILE,
       `import { ${this.options.pascalName}Component } from './${this.options.name}.component';`,
-      DEMO_IMPORT_MARKER
+      MARKERS.addDemoComponentImportToConstants
+    );
+
+    // Add the demo route
+    addToFile(
+      DEMO_COMPONENTS_FILE,
+      route,
+      MARKERS.addRouteForDemoComponent
     );
 
     // Import the new UI component from the library
     addToFile(
       DEMO_MODULE_FILE,
-      this.options.moduleName,
-      DEMO_IMPORT_FROM_UI_MARKER
+      `${this.options.moduleName},`,
+      MARKERS.addUiComponentToDemoImports
     );
 
-    // Add the new UI component to the imports array
+    // Add the UI module to the demo module imports array
     addToFile(
       DEMO_MODULE_FILE,
-      this.options.moduleName,
-      DEMO_ADD_TO_IMPORTS_MARKER
+      `${this.options.moduleName},`,
+      MARKERS.addUiComponentToUiImports
     );
 
-    // Import the demo component for the new UI component
+    // Import the demo component file
     addToFile(
       DEMO_MODULE_FILE,
-      `import { ${this.options.pascalName} } from './components/${this.options.name}.component';`,
-      DEMO_IMPORT_COMPONENT_MARKER
+      `import { ${this.options.pascalName}Component } from './components/${this.options.name}.component';`,
+      MARKERS.importDemoComponentToDemoModule
     );
 
     // Add the demo component to the declarations array
     addToFile(
       DEMO_MODULE_FILE,
-      this.options.pascalName,
-      DEMO_ADD_TO_DECLARATIONS_MARKER
+      `${this.options.pascalName}Component`,
+      MARKERS.addDemoComponentToDeclarations
     );
 
   }
@@ -298,7 +333,7 @@ module.exports = class extends Generator {
     addToFile(
       CS_CONFIG_FILE,
       `{name: '${this.options.pascalName}'},`,
-      CZ_CONFIG_MARKER
+      MARKERS.addUiComponentAsCommitizenScope
     );
   }
 };
