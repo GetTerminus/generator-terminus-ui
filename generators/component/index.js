@@ -5,8 +5,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const _startCase = require('lodash.startcase');
 const mkdirp = require('mkdirp');
-const path = require('path');
-const fs = require('fs');
+const utilities = require('./../utilities.js');
 
 const LIB_PREFIX = 'Ts';
 const COMPONENT_PREFIX = LIB_PREFIX.toLowerCase();
@@ -18,68 +17,6 @@ const DEMO_COMPONENT_PATH = `src/demo/src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
 const DEMO_MODULE_FILE = `src/demo/src/app/app.module.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
-
-// TODO: Move markers and inject method back to shared utils file
-
-const MARKERS = {
-  // Import the UI component module to the UI module file
-  importUiComponentToUiModule: '// INJECT: UI component to UI module',
-
-  // Add the UI component module to the UI module import array
-  addUiComponentToUiModuleImportArray: '// INJECT: Add UI component module to imports',
-
-  // Add the UI comonent module to the module exports array
-  addUiComponentToUiModuleExports: '// INJECT: Add UI component to module exports',
-
-  // Export the UI component inside the index.ts file
-  addUiComponentIndexExport: '// INJECT: Export the UI component from the module index',
-
-  // Import the demo component into the constants file
-  addDemoComponentImportToConstants: '// INJECT: Import demo component to constants file',
-
-  // Add a new route for the demo component - MISSING
-  addRouteForDemoComponent: '// INJECT: Add route for demo component',
-
-  // Import the new UI component from the lib into the demo app module
-  addUiComponentToDemoImports: '// INJECT: Add new UI component to demo UI imports',
-
-  // Add the new UI component in the demo imports array
-  addUiComponentToUiImports: '// INJECT: Add new UI component to demo module imports array',
-
-  // Import the demo component file to the demo module
-  importDemoComponentToDemoModule: '// INJECT: Import demo component file',
-
-  // Add demo component to the demo module declarations
-  addDemoComponentToDeclarations: '// INJECT: Add demo component to declarations',
-
-  // Add the new UI component as a commitizen scope
-  addUiComponentAsCommitizenScope: '// INJECT: Add commitizen scope',
-};
-
-
-
-
-/**
- * Helper method to inject a line to a file
- *
- * @param {String} filename The name of the file to edit
- * @param {String} lineToAdd The content to add to the file
- * @param {String} beforeMarker The marker to inject the content above
- */
-function addToFile(filename, lineToAdd, beforeMarker) {
-  try {
-    const fullPath = path.resolve(process.cwd(), filename);
-    let fileSrc = fs.readFileSync(fullPath, 'utf8');
-    const indexOf = fileSrc.indexOf(beforeMarker);
-    const lineStart = fileSrc.substring(0, indexOf).lastIndexOf('\n') + 1;
-    const indent = fileSrc.substring(lineStart, indexOf);
-    fileSrc = fileSrc.substring(0, indexOf) + lineToAdd + '\n' + indent + fileSrc.substring(indexOf);
-
-    fs.writeFileSync(fullPath, fileSrc);
-  } catch (e) {
-    throw e;
-  }
-};
 
 
 /*
@@ -204,31 +141,31 @@ module.exports = class extends Generator {
     );
 
     // Import to the module file
-    addToFile(
+    utilities.addToFile(
       MODULE_FILE,
       `import { ${this.options.moduleName} } from './${this.options.name}/${this.options.name}.module';`,
-      MARKERS.importUiComponentToUiModule
+      utilities.MARKERS.importUiComponentToUiModule
     );
 
     // Add to imports array
-    addToFile(
+    utilities.addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      MARKERS.addUiComponentToUiModuleImportArray
+      utilities.MARKERS.addUiComponentToUiModuleImportArray
     );
 
     // Add to exports array
-    addToFile(
+    utilities.addToFile(
       MODULE_FILE,
       `${this.options.moduleName},`,
-      MARKERS.addUiComponentToUiModuleExports
+      utilities.MARKERS.addUiComponentToUiModuleExports
     );
 
     // Export from the primary index file
-    addToFile(
+    utilities.addToFile(
       INDEX_PATH,
       `export { ${this.options.moduleName} } from './src/${this.options.name}/${this.options.name}.module';`,
-      MARKERS.addUiComponentIndexExport
+      utilities.MARKERS.addUiComponentIndexExport
     );
   }
 
@@ -279,45 +216,45 @@ module.exports = class extends Generator {
   },`;
 
     // Import the demo component
-    addToFile(
+    utilities.addToFile(
       DEMO_COMPONENTS_FILE,
       `import { ${this.options.pascalName}Component } from './${this.options.name}.component';`,
-      MARKERS.addDemoComponentImportToConstants
+      utilities.MARKERS.addDemoComponentImportToConstants
     );
 
     // Add the demo route
-    addToFile(
+    utilities.addToFile(
       DEMO_COMPONENTS_FILE,
       route,
-      MARKERS.addRouteForDemoComponent
+      utilities.MARKERS.addRouteForDemoComponent
     );
 
     // Import the new UI component from the library
-    addToFile(
+    utilities.addToFile(
       DEMO_MODULE_FILE,
       `${this.options.moduleName},`,
-      MARKERS.addUiComponentToDemoImports
+      utilities.MARKERS.addUiComponentToDemoImports
     );
 
     // Add the UI module to the demo module imports array
-    addToFile(
+    utilities.addToFile(
       DEMO_MODULE_FILE,
       `${this.options.moduleName},`,
-      MARKERS.addUiComponentToUiImports
+      utilities.MARKERS.addUiComponentToUiImports
     );
 
     // Import the demo component file
-    addToFile(
+    utilities.addToFile(
       DEMO_MODULE_FILE,
       `import { ${this.options.pascalName}Component } from './components/${this.options.name}.component';`,
-      MARKERS.importDemoComponentToDemoModule
+      utilities.MARKERS.importDemoComponentToDemoModule
     );
 
     // Add the demo component to the declarations array
-    addToFile(
+    utilities.addToFile(
       DEMO_MODULE_FILE,
-      `${this.options.pascalName}Component`,
-      MARKERS.addDemoComponentToDeclarations
+      `${this.options.pascalName}Component,`,
+      utilities.MARKERS.addDemoComponentToDeclarations
     );
 
   }
@@ -330,10 +267,10 @@ module.exports = class extends Generator {
       `Adding a new commit scope for ${chalk.red(this.options.pascalName)}.`
     );
 
-    addToFile(
+    utilities.addToFile(
       CS_CONFIG_FILE,
       `{name: '${this.options.pascalName}'},`,
-      MARKERS.addUiComponentAsCommitizenScope
+      utilities.MARKERS.addUiComponentAsCommitizenScope
     );
   }
 };
