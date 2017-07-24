@@ -9,9 +9,9 @@ import {
  * This is the <%= kebabName %> UI Component
  *
  * @example
- * <<%= kebabName %>
+ * <ts-<%= kebabName %>
  *              item="Value"
- * ></<%= kebabName %>>
+ * ></ts-<%= kebabName %>>
  */
 @Component({
   selector: 'ts-<%= kebabName %>',
