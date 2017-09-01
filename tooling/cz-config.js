@@ -19,6 +19,7 @@ module.exports = {
   scopes: [
     {name: 'Welcome'},
     {name: 'Component'},
+    {name: 'Directive'},
     {name: 'Dependencies'},
     {name: 'Tooling'},
   ],
