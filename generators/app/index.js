@@ -5,6 +5,7 @@ const yosay = require('yosay');
 
 const commands = `
 $ yo terminus-ui:component my-button
+$ yo terminus-ui:directive foo-bar
 $ ...more coming soon...
 `;
 
