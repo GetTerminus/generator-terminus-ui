@@ -17,6 +17,7 @@ const DEMO_COMPONENT_PATH = `src/demo/src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
 const DEMO_MODULE_FILE = `src/demo/src/app/app.module.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
+const QA_PREFIX = 'qa';
 
 
 /*
@@ -60,6 +61,8 @@ module.exports = class extends Generator {
     // Lowercased first character component name: `myButton`
     this.options.camelCaseName = this.options.pascalName.charAt(0).toLowerCase() +
       this.options.pascalName.slice(1);
+    // QA flag name: `qa-my-button`
+    this.options.qaFlagName = `${QA_PREFIX}-${this.options.name}`;
   }
 
   /**
@@ -115,6 +118,7 @@ module.exports = class extends Generator {
           this.destinationPath(`${destinationDir}/${this.options.name}.component.html`),
           {
             pascalName: this.options.pascalName,
+            qaFlagName: this.options.qaFlagName,
           }
         );
 
