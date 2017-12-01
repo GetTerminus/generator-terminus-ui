@@ -44,9 +44,7 @@
     "last-release-git": "0.0.3",
     "nsp": "3.1.0",
     "semantic-release": "6.3.6",
-    "validate-commit-msg": "2.14.0",
-    "yeoman-assert": "3.1.0",
-    "yeoman-test": "1.7.0"
+    "validate-commit-msg": "2.14.0"
   },
   "jest": {
     "testEnvironment": "node"
