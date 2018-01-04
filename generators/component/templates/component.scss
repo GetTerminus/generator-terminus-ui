@@ -11,9 +11,13 @@
 //    2. Verify the 'c-' prefix should be used
 //    3. Add needed styles
 //
-.c-<%= kebabName %> {
-  // Top level styles should be nested here
-  &#{&} {
+.ts-<%= kebabName %> {
+  // Top level styles belong here
+  .c-<%= kebabName %> {
     //
   }
+}
+
+.c-<%= kebabName %> {
+  // Nested classes belong here
 }
