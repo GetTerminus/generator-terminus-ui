@@ -132,6 +132,15 @@ module.exports = class extends Generator {
             camelCaseComponentName: this.options.camelCaseName,
           }
         );
+
+        // Create the component MD
+        this.fs.copyTpl(
+          this.templatePath('component.md'),
+          this.destinationPath(`${destinationDir}/${this.options.name}.component.md`),
+          {
+            kebabName: this.options.name,
+          }
+        );
       }
     });
   }
@@ -181,7 +190,7 @@ module.exports = class extends Generator {
       `Creating the new ${chalk.red(this.options.prettyName)} component into the demo project.`
     );
 
-    const destinationDir = this.destinationPath(DEMO_COMPONENT_PATH);
+    const destinationDir = this.destinationPath(`${DEMO_COMPONENT_PATH}/${this.options.name}`);
 
     mkdirp(destinationDir, err => {
       if (err) {
