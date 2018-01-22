@@ -9,10 +9,10 @@ export { <%= componentName %> } from './<%= kebabName %>.component';
   imports: [
     CommonModule,
   ],
-  exports: [
+  declarations: [
     <%= componentName %>,
   ],
-  declarations: [
+  exports: [
     <%= componentName %>,
   ],
 })

@@ -199,7 +199,7 @@ module.exports = class extends Generator {
         // Create the demo component
         this.fs.copyTpl(
           this.templatePath('demo.ts'),
-          this.destinationPath(`${destinationDir}/${this.options.name}.component.ts`),
+          this.destinationPath(`${destinationDir}/${this.options.name}/${this.options.name}.component.ts`),
           {
             kebabName: this.options.name,
             pascalName: this.options.pascalName,
@@ -231,7 +231,7 @@ module.exports = class extends Generator {
     // Import the demo component
     utilities.addToFile(
       DEMO_COMPONENTS_FILE,
-      `import { ${this.options.pascalName}Component } from './${this.options.name}.component';`,
+      `import { ${this.options.pascalName}Component } from './${this.options.name}/${this.options.name}.component';`,
       utilities.MARKERS.addDemoComponentImportToConstants
     );
 
@@ -259,7 +259,7 @@ module.exports = class extends Generator {
     // Import the demo component file
     utilities.addToFile(
       DEMO_MODULE_FILE,
-      `import { ${this.options.pascalName}Component } from './components/${this.options.name}.component';`,
+      `import { ${this.options.pascalName}Component } from './components/${this.options.name}/${this.options.name}.component';`,
       utilities.MARKERS.importDemoComponentToDemoModule
     );
 
