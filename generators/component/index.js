@@ -199,7 +199,7 @@ module.exports = class extends Generator {
         // Create the demo component
         this.fs.copyTpl(
           this.templatePath('demo.ts'),
-          this.destinationPath(`${destinationDir}/${this.options.name}/${this.options.name}.component.ts`),
+          this.destinationPath(`${destinationDir}/${this.options.name}.component.ts`),
           {
             kebabName: this.options.name,
             pascalName: this.options.pascalName,
