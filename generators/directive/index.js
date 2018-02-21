@@ -108,6 +108,15 @@ module.exports = class extends Generator {
             directiveSelector: this.options.directiveSelector,
           }
         );
+
+        // Create the directive MD
+        this.fs.copyTpl(
+          this.templatePath('directive.md'),
+          this.destinationPath(`${destinationDir}/${this.options.name}.directive.md`),
+          {
+            kebabName: this.options.name,
+          }
+        );
       }
     });
   }

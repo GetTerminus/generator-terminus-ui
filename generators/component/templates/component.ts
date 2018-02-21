@@ -7,6 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+
 /**
  * TODO: Fill this section out
  * This is the <%= kebabName %> UI Component
@@ -28,6 +29,7 @@ import {
   host: {
     class: 'ts-<%= kebabName %>',
   },
+  exportAs: 'ts<%= kebabName %>',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
