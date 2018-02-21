@@ -166,7 +166,7 @@ module.exports = class extends Generator {
       `Creating the new ${chalk.red(this.options.prettyName)} demo component into the demo project.`
     );
 
-    const destinationDir = this.destinationPath(DEMO_COMPONENT_PATH);
+    const destinationDir = this.destinationPath(`${DEMO_COMPONENT_PATH}/${this.options.name}`);
 
     mkdirp(destinationDir, err => {
       if (err) {
