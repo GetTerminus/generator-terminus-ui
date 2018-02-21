@@ -153,7 +153,7 @@ module.exports = class extends Generator {
     // Export from the primary index file
     utilities.addToFile(
       INDEX_PATH,
-      `export { ${this.options.moduleName} } from './src/${this.options.name}/${this.options.name}.module';`,
+      `export * from './src/${this.options.name}/${this.options.name}.module';`,
       utilities.MARKERS.addUiComponentIndexExport
     );
   }
