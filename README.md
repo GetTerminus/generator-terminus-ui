@@ -75,7 +75,6 @@ MIT © [Terminus][license-url]
 
 ## TODO
 
-- Directive generator
 - Pipe generator
 - Service generator
 - SCSS helper generator
