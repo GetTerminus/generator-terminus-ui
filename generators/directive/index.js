@@ -11,11 +11,11 @@ const LIB_PREFIX = 'Ts';
 const DIRECTIVE_PREFIX = LIB_PREFIX.toLowerCase();
 const DIRECTIVE_SUFFIX = 'Directive';
 const MODULE_SUFFIX = 'Module';
-const MODULE_FILE = 'src/lib/src/module.ts';
-const INDEX_PATH = 'src/lib/index.ts';
-const DEMO_COMPONENT_PATH = `src/demo/src/app/components/`;
+const MODULE_FILE = 'terminus-ui/src/module.ts';
+const INDEX_PATH = 'terminus-ui/index.ts';
+const DEMO_COMPONENT_PATH = `src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
-const DEMO_MODULE_FILE = `src/demo/src/app/app.module.ts`;
+const DEMO_MODULE_FILE = `src/app/app.module.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
 
 
@@ -23,10 +23,10 @@ const CS_CONFIG_FILE = `tooling/cz-config.js`;
  * Full path for component:
  *
  * 1. Generate all files (module, component html|scss|spec|ts)
- * 2. Import file to lib/src/module.ts
- * 3. Add to imports array in lib/src/module.ts
- * 4. Add to exports array in lib/src/module.ts
- * 5. Export file from lib/index.ts
+ * 2. Import file to terminus-ui/src/module.ts
+ * 3. Add to imports array in terminus-ui/src/module.ts
+ * 4. Add to exports array in terminus-ui/src/module.ts
+ * 5. Export file from terminus-ui/index.ts
  * 6. Create demo component
  * 7. Add component to components.ts components array
  * 7. Add component to demo module
@@ -70,7 +70,7 @@ module.exports = class extends Generator {
 
     this.log('Generating files.');
 
-    const destinationDir = this.destinationPath(`src/lib/src/${this.options.name}/`);
+    const destinationDir = this.destinationPath(`terminus-ui/src/${this.options.name}/`);
 
     mkdirp(destinationDir, (err) => {
       if (err) {
