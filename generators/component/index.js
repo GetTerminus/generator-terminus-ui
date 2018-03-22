@@ -177,7 +177,7 @@ module.exports = class extends Generator {
     // Export from the primary index file
     utilities.addToFile(
       INDEX_PATH,
-      `export * from './src/${this.options.name}/${this.options.name}.module';`,
+      `export * from './${this.options.name}/${this.options.name}.module';`,
       utilities.MARKERS.addUiComponentIndexExport
     );
   }
@@ -187,7 +187,7 @@ module.exports = class extends Generator {
    */
   addDemoComponent() {
     this.log(
-      `Creating the new ${chalk.red(this.options.prettyName)} component into the demo project.`
+      `Creating the new ${chalk.red(this.options.prettyName)} component in the demo project.`
     );
 
     const destinationDir = this.destinationPath(`${DEMO_COMPONENT_PATH}/${this.options.name}`);
@@ -200,6 +200,34 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('demo.ts'),
           this.destinationPath(`${destinationDir}/${this.options.name}.component.ts`),
+          {
+            kebabName: this.options.name,
+            pascalName: this.options.pascalName,
+            selector: this.options.componentSelector,
+          }
+        );
+      }
+    });
+  }
+
+  /**
+   * Create the demo component
+   */
+  addDemoHtml() {
+    this.log(
+      `Creating the new ${chalk.red(this.options.prettyName)} component HTML in the demo project.`
+    );
+
+    const destinationDir = this.destinationPath(`${DEMO_COMPONENT_PATH}/${this.options.name}`);
+
+    mkdirp(destinationDir, err => {
+      if (err) {
+        console.error('Error adding demo files: ', err);
+      } else {
+        // Create the demo component
+        this.fs.copyTpl(
+          this.templatePath('demo.html'),
+          this.destinationPath(`${destinationDir}/${this.options.name}.component.html`),
           {
             kebabName: this.options.name,
             pascalName: this.options.pascalName,

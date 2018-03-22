@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'demo-<%= kebabName %>',
-  template: `
-    <<%= selector %>
-    ></<%= selector %>>
-  `,
+  templateUrl: './<%= kebabName %>.component.html',
 })
 export class <%= pascalName %>Component {
 }
