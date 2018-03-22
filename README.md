@@ -62,7 +62,7 @@ below:
 1. Import the `TsMyButtonModule` module inside `./terminus-ui/src/module.ts`
 1. Add the `TsMyButtonModule` module to the imports array in `./terminus-ui/src/module.ts`
 1. Add the `TsMyButtonModule` module to the exports array in `./terminus-ui/src/module.ts`
-1. Export the `TsMyButtonModule` module from `./terminus-ui/index.ts`
+1. Export the `TsMyButtonModule` module from `./terminus-ui/src/index.ts`
 1. Create the `MyButtonComponent` for development at `./src/app/components/my-button.component.ts`
 1. Add the `MyButtonComponent` component to the demo navigation array in `./src/app/components/components.component.ts`
 1. Add the new component as a scope `MyButton`

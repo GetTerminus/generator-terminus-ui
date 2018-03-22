@@ -12,7 +12,7 @@ const COMPONENT_PREFIX = LIB_PREFIX.toLowerCase();
 const COMPONENT_SUFFIX = 'Component';
 const MODULE_SUFFIX = 'Module';
 const MODULE_FILE = 'terminus-ui/src/module.ts';
-const INDEX_PATH = 'terminus-ui/index.ts';
+const INDEX_PATH = 'terminus-ui/src/index.ts';
 const DEMO_COMPONENT_PATH = `src/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
 const DEMO_MODULE_FILE = `src/app/app.module.ts`;
@@ -27,7 +27,7 @@ const QA_PREFIX = 'qa';
  * 2. Import file to terminus-ui/src/module.ts
  * 3. Add to imports array in terminus-ui/src/module.ts
  * 4. Add to exports array in terminus-ui/src/module.ts
- * 5. Export file from terminus-ui/index.ts
+ * 5. Export file from terminus-ui/src/index.ts
  * 6. Create demo component
  * 7. Add component to components.ts components array
  * 7. Add component to demo module
