@@ -54,17 +54,17 @@ This will stub in a new component in the UI library and demo app. The exact chan
 below:
 
 1. Generate UI component files:
-    - `./src/lib/src/my-button/my-button.module.ts`
-    - `./src/lib/src/my-button/my-button.component.ts`
-    - `./src/lib/src/my-button/my-button.component.spec.ts`
-    - `./src/lib/src/my-button/my-button.component.scss`
-    - `./src/lib/src/my-button/my-button.component.html`
-1. Import the `TsMyButtonModule` module inside `./src/lib/src/module.ts`
-1. Add the `TsMyButtonModule` module to the imports array in `./src/lib/src/module.ts`
-1. Add the `TsMyButtonModule` module to the exports array in `./src/lib/src/module.ts`
-1. Export the `TsMyButtonModule` module from `./src/lib/index.ts`
-1. Create the `MyButtonComponent` for development at `./src/demo/src/app/components/my-button.component.ts`
-1. Add the `MyButtonComponent` component to the demo navigation array in `./src/demo/src/app/components/components.component.ts`
+    - `./terminus-ui/src/my-button/my-button.module.ts`
+    - `./terminus-ui/src/my-button/my-button.component.ts`
+    - `./terminus-ui/src/my-button/my-button.component.spec.ts`
+    - `./terminus-ui/src/my-button/my-button.component.scss`
+    - `./terminus-ui/src/my-button/my-button.component.html`
+1. Import the `TsMyButtonModule` module inside `./terminus-ui/src/module.ts`
+1. Add the `TsMyButtonModule` module to the imports array in `./terminus-ui/src/module.ts`
+1. Add the `TsMyButtonModule` module to the exports array in `./terminus-ui/src/module.ts`
+1. Export the `TsMyButtonModule` module from `./terminus-ui/index.ts`
+1. Create the `MyButtonComponent` for development at `./src/app/components/my-button.component.ts`
+1. Add the `MyButtonComponent` component to the demo navigation array in `./src/app/components/components.component.ts`
 1. Add the new component as a scope `MyButton`
 
 
