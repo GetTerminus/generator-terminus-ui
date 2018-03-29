@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { <%= componentName %> } from './<%= kebabName %>.component';
-export { <%= componentName %> } from './<%= kebabName %>.component';
+export * from './<%= kebabName %>.component';
 
 
 @NgModule({
