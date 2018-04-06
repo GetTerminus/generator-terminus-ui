@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { <%= directiveName %> } from './<%= kebabName %>.directive';
-export { <%= directiveName %> } from './<%= kebabName %>.directive';
+
+export * from './<%= kebabName %>.directive';
 
 
 @NgModule({
