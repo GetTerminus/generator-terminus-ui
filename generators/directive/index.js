@@ -13,9 +13,9 @@ const DIRECTIVE_SUFFIX = 'Directive';
 const MODULE_SUFFIX = 'Module';
 const MODULE_FILE = 'terminus-ui/src/module.ts';
 const INDEX_PATH = 'terminus-ui/src/index.ts';
-const DEMO_COMPONENT_PATH = `demo/src/app/components/`;
+const DEMO_COMPONENT_PATH = `demo/app/components/`;
 const DEMO_COMPONENTS_FILE = `${DEMO_COMPONENT_PATH}/components.constant.ts`;
-const DEMO_MODULE_FILE = `demo/src/app/app.module.ts`;
+const DEMO_MODULE_FILE = `demo/app/app.module.ts`;
 const CS_CONFIG_FILE = `tooling/cz-config.js`;
 
 
