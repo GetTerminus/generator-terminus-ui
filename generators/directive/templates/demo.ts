@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'demo-<%= kebabName %>',
-  template: `
-    <div <%= directiveSelector %>>
-      Foo
-    </div>
-  `,
+  templateUrl: './<%= kebabName %>.component.html',
 })
 export class <%= pascalName %>Component {
 }

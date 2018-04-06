@@ -187,6 +187,32 @@ module.exports = class extends Generator {
   }
 
   /**
+   * Create the demo component
+   */
+  addDemoHtml() {
+    this.log(
+      `Creating the new ${chalk.red(this.options.prettyName)} component HTML in the demo project.`
+    );
+
+    const destinationDir = this.destinationPath(`${DEMO_COMPONENT_PATH}/${this.options.name}`);
+
+    mkdirp(destinationDir, err => {
+      if (err) {
+        console.error('Error adding demo files: ', err);
+      } else {
+        // Create the demo component
+        this.fs.copyTpl(
+          this.templatePath('demo.html'),
+          this.destinationPath(`${destinationDir}/${this.options.name}.component.html`),
+          {
+            selector: this.options.componentSelector,
+          }
+        );
+      }
+    });
+  }
+
+  /**
    * Inject the demo component into the demo app
    */
   injectDemoComponent() {
