@@ -11,7 +11,7 @@
 Use the thing...
 
 ```html
-<div <%= kebabName %>>
+<div ts-<%= kebabName %>>
 </div>
 ```
 
