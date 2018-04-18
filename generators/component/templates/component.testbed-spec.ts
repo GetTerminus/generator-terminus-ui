@@ -5,9 +5,13 @@ import {
 import {
   TestBed,
   ComponentFixture,
-  async,
+  TestModuleMetadata,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import {
+  configureTestBedWithoutReset,
+  expectNativeEl,
+} from '@terminus/ngx-tools/testing';
 
 import { <%= componentName %> } from './<%= kebabName %>.component';
 
@@ -25,34 +29,28 @@ class TestHostComponent {
 }
 
 describe(`<%= componentName %>`, () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+  let testComponent: TestHostComponent;
+  let component: <%= componentName %>;
+  const moduleDefinition: TestModuleMetadata = {
+    declarations: [
+      <%= componentName %>,
+      TestHostComponent,
+    ],
+  };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-      ],
-      declarations: [
-        <%= componentName %>,
-        TestHostComponent,
-      ],
-    })
-      .overrideComponent(<%= componentName %>, {
-        set: {
-          template: '',
-          templateUrl: null,
-        }
-      })
-      .compileComponents().then(() => {
-        this.fixture = TestBed.createComponent(TestHostComponent);
-        this.hostComponent = this.fixture.componentInstance;
-        this.component = this.hostComponent.<%= camelCaseComponentName %>;
-      });
-  }));
+  configureTestBedWithoutReset(moduleDefinition);
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TestHostComponent);
+    testComponent = fixture.componentInstance;
+    component = fixture.componentInstance.<%= camelCaseComponentName %>;
+  });
 
 
-  it(`should exist`, () => {
-    this.fixture.detectChanges();
-
-    expect(this.component).toBeTruthy();
+  test(`should exist`, () => {
+    fixture.detectChanges();
+    expectNativeEl(fixture).toBeTruthy();
   });
 
 });

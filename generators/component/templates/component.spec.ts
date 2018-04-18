@@ -2,14 +2,15 @@ import { <%= componentName %> } from './<%= kebabName %>.component';
 
 
 describe(`<%= componentName %>`, () => {
+  let component: <%= componentName %>;
 
   beforeEach(() => {
-    this.component = new <%= componentName %>();
+    component = new <%= componentName %>();
   });
 
 
   test(`should exist`, () => {
-    expect(this.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
 });
