@@ -89,6 +89,7 @@ module.exports = class extends Generator {
             kebabName: this.options.name,
             moduleName: this.options.moduleName,
             componentName: this.options.componentName,
+            pascalName: this.options.pascalName,
           }
         );
 

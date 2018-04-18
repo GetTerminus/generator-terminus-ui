@@ -29,7 +29,7 @@ import {
   host: {
     class: 'ts-<%= kebabName %>',
   },
-  exportAs: 'ts<%= kebabName %>',
+  exportAs: 'ts<%= pascalName %>',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
