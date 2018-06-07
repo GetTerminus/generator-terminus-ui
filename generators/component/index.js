@@ -100,6 +100,7 @@ module.exports = class extends Generator {
           {
             kebabName: this.options.name,
             componentName: this.options.componentName,
+            pascalName: this.options.pascalName,
           }
         );
 
