@@ -1,9 +1,9 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   Output,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   ViewEncapsulation,
 } from '@angular/core';
 

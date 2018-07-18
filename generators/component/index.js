@@ -59,8 +59,7 @@ module.exports = class extends Generator {
     // Component selector: `ts-my-button`
     this.options.componentSelector = `${COMPONENT_PREFIX}-${this.options.name}`;
     // Lowercased first character component name: `myButton`
-    this.options.camelCaseName = this.options.pascalName.charAt(0).toLowerCase() +
-      this.options.pascalName.slice(1);
+    this.options.camelCaseName = this.options.pascalName.charAt(0).toLowerCase() + this.options.pascalName.slice(1);
     // QA flag name: `qa-my-button`
     this.options.qaFlagName = `${QA_PREFIX}-${this.options.name}`;
   }
@@ -317,6 +316,3 @@ module.exports = class extends Generator {
     );
   }
 };
-
-
-
