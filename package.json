@@ -12,7 +12,8 @@
     "terminus",
     "ui",
     "generator",
-    "yeoman-generator"
+    "yeoman-generator",
+    "yeoman"
   ],
   "scripts": {
     "cm": "./node_modules/.bin/git-cz",
